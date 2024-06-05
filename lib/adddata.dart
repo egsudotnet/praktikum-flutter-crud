@@ -15,7 +15,7 @@ TextEditingController controllerPrice = new TextEditingController();
 TextEditingController controllerStock = new TextEditingController();
 
 void addData(){
-  var url="http://localhost:8030/php-rest-api-praktikum-flutter/adddata.php";
+  var url="http://localhost/php-rest-api-praktikum-flutter/adddata.php";
 
   http.post(Uri.parse(url), body: {
     "itemcode": controllerCode.text,

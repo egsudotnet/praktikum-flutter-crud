@@ -14,7 +14,7 @@ class Detail extends StatefulWidget {
 class _DetailState extends State<Detail> {
   void deleteData() {
     var url =
-        "http://localhost:8030/php-rest-api-praktikum-flutter/deleteData.php";
+        "http://localhost/php-rest-api-praktikum-flutter/deleteData.php";
     http.post(Uri.parse(url), body: {'id': widget.list[widget.index]['id']});
   }
 

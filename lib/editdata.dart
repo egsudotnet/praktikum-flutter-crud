@@ -21,7 +21,7 @@ class _EditDataState extends State<EditData> {
 
 
   void editData() {
-    var url="http://localhost:8030/php-rest-api-praktikum-flutter/editdata.php";
+    var url="http://localhost/php-rest-api-praktikum-flutter/editdata.php";
     http.post(Uri.parse(url),body: {
       "id": widget.list[widget.index]['id'],
       "itemcode": controllerCode.text,
