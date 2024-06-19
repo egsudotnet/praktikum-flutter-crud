@@ -1,73 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/main.dart';
 import 'package:http/http.dart' as http;
 
 class AddData extends StatefulWidget {
   @override
-  _AddDataState createState() => new _AddDataState();
+  _AddDataState createState() => _AddDataState();
 }
 
 class _AddDataState extends State<AddData> {
+  TextEditingController controllerCode = TextEditingController();
+  TextEditingController controllerName = TextEditingController();
+  TextEditingController controllerPrice = TextEditingController();
+  TextEditingController controllerStock = TextEditingController();
+  
+  TextEditingController controllerDiskon = TextEditingController();
 
+  void addData() {
+    var url =
+        "http://localhost:8030/php-rest-api-praktikum-flutter/adddata.php";
 
-TextEditingController controllerCode = new TextEditingController();
-TextEditingController controllerName = new TextEditingController();
-TextEditingController controllerPrice = new TextEditingController();
-TextEditingController controllerStock = new TextEditingController();
-
-void addData(){
-  var url="http://localhost/php-rest-api-praktikum-flutter/adddata.php";
-
-  http.post(Uri.parse(url), body: {
-    "itemcode": controllerCode.text,
-    "itemname": controllerName.text,
-    "price": controllerPrice.text,
-    "stock": controllerStock.text
-  });
-}
+    http.post(Uri.parse(url), body: {
+      "itemcode": controllerCode.text,
+      "itemname": controllerName.text,
+      "price": controllerPrice.text,
+      "stock": controllerStock.text,
+      "diskon": controllerDiskon.text
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("ADD DATA"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("ADD DATA"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: <Widget>[
-            new Column(
+            Column(
               children: <Widget>[
-                new TextField(
+                TextField(
                   controller: controllerCode,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Item Code", labelText: "Item Code"),
                 ),
-                new TextField(
+                TextField(
                   controller: controllerName,
-                  decoration: new InputDecoration(
+                  decoration: InputDecoration(
                       hintText: "Item Name", labelText: "Item Name"),
                 ),
-                new TextField(
+                TextField(
                   controller: controllerPrice,
-                  decoration: new InputDecoration(
-                      hintText: "Price", labelText: "Price"),
+                  decoration:
+                      InputDecoration(hintText: "Price", labelText: "Price"),
                 ),
-                new TextField(
+                TextField(
                   controller: controllerStock,
-                  decoration: new InputDecoration(
-                      hintText: "Stock", labelText: "Stock"),
+                  decoration:
+                      InputDecoration(hintText: "Stock", labelText: "Stock"),
                 ),
-                new Padding(
+                TextField(
+                  controller: controllerDiskon,
+                  decoration:
+                      InputDecoration(hintText: "Diskon", labelText: "Diskon"),
+                ),
+                Padding(
                   padding: const EdgeInsets.all(10.0),
                 ),
-                new ElevatedButton(
-                  child: new Text("ADD DATA"),
-                  style:ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+                ElevatedButton(
+                  child: Text(
+                    "ADD DATA",
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent),
                   onPressed: () {
                     addData();
                     Navigator.pop(context);
+                    
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context)=>const Home()
+                      )
+                    );
                   },
-                  
                 )
               ],
             ),

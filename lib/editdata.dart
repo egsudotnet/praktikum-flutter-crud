@@ -9,7 +9,7 @@ class EditData extends StatefulWidget {
   EditData({required this.list, required this.index});
 
   @override
-  _EditDataState createState() => new _EditDataState();
+  _EditDataState createState() => _EditDataState();
 }
 
 class _EditDataState extends State<EditData> {
@@ -18,72 +18,81 @@ class _EditDataState extends State<EditData> {
   late TextEditingController controllerName;
   late TextEditingController controllerPrice;
   late TextEditingController controllerStock;
+  
+  late TextEditingController controllerDiskon;
 
 
   void editData() {
-    var url="http://localhost/php-rest-api-praktikum-flutter/editdata.php";
+    var url="http://localhost:8030/php-rest-api-praktikum-flutter/editdata.php";
     http.post(Uri.parse(url),body: {
       "id": widget.list[widget.index]['id'],
       "itemcode": controllerCode.text,
       "itemname": controllerName.text,
       "price": controllerPrice.text,
-      "stock": controllerStock.text
+      "stock": controllerStock.text,
+      "diskon": controllerDiskon.text
     });
   }
 
 
   @override
     void initState() {
-      controllerCode= new TextEditingController(text: widget.list[widget.index]['item_code'] );
-      controllerName= new TextEditingController(text: widget.list[widget.index]['item_name'] );
-      controllerPrice= new TextEditingController(text: widget.list[widget.index]['price'] );
-      controllerStock= new TextEditingController(text: widget.list[widget.index]['stock'] );
+      controllerCode= TextEditingController(text: widget.list[widget.index]['item_code'] );
+      controllerName= TextEditingController(text: widget.list[widget.index]['item_name'] );
+      controllerPrice= TextEditingController(text: widget.list[widget.index]['price'] );
+      controllerStock= TextEditingController(text: widget.list[widget.index]['stock'] );
+      controllerDiskon= TextEditingController(text: widget.list[widget.index]['diskon'] );
       super.initState();
     }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("EDIT DATA"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("EDIT DATA"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: <Widget>[
-            new Column(
+            Column(
               children: <Widget>[
-                new TextField(
+                TextField(
                   controller: controllerCode,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Item Code", labelText: "Item Code"),
                 ),
-                new TextField(
+                TextField(
                   controller: controllerName,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Item Name", labelText: "Item Name"),
                 ),
-                new TextField(
+                TextField(
                   controller: controllerPrice,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Price", labelText: "Price"),
                 ),
-                new TextField(
+                TextField(
                   controller: controllerStock,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Stock", labelText: "Stock"),
                 ),
-                new Padding(
-                  padding: const EdgeInsets.all(10.0),
+                TextField(
+                  controller: controllerDiskon,
+                  decoration: const InputDecoration(
+                      hintText: "Diskon", labelText: "Diskon"),
                 ),
-                new ElevatedButton(
-                  child: new Text("EDIT DATA"),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                ElevatedButton(
+                  child: Text("EDIT DATA"),
                   style:ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
                   onPressed: () {
                     editData();
                     Navigator.of(context).push(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=>new Home()
+                      MaterialPageRoute(
+                        builder: (BuildContext context)=>const Home()
                       )
                     );
                   },

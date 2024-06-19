@@ -22,7 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Future<List> getData() async {
-    final response = await http.get(Uri.parse("http://localhost/php-rest-api-praktikum-flutter/getdata.php"));
+    final response = await http.get(Uri.parse("http://localhost:8030/php-rest-api-praktikum-flutter/getdata.php"));
     
     return json.decode(response.body);
   }
@@ -82,6 +82,7 @@ class ItemList extends StatelessWidget {
                 title:  Text(list[i]['item_name']),
                 leading:  const Icon(Icons.widgets),
                 subtitle:  Text("Stock : ${list[i]['stock']}"),
+                trailing:  Text("Diskon : ${list[i]['diskon']}"),
               ),
             ),
           ),
